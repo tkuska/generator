@@ -1,0 +1,25 @@
+{% block extends %}
+{{ "{% extends '::base.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+    {{'{% block javascripts %}'}}
+    {{'{{ parent() }}'}}
+    {{'{{ datatable_render_js(datatable) }}'}}
+    {{'{% endblock %}'}}
+{{ "{% block body -%}" }}
+    <h1>{{ entity }} list</h1>
+
+   {{'{{ datatable_render_html(datatable) }}'}}
+
+    {% if 'new' in actions %}
+    <ul>
+        <li>
+            <a href="{{ "{{ path('" ~ route_name_prefix ~ "_new') }}" }}" class="btn btn-primary">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endif %}
+{{ "{% endblock %}" }}
+{% endblock body %}
