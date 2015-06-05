@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\ArrayInput;
+use Tkuska\GeneratorBundle\Generator\DoctrineCrudGenerator;
 
 /**
  * Generates a CRUD for a Doctrine entity.
@@ -22,11 +23,17 @@ class GenerateDoctrineCrudCommand extends BaseGenerateDoctrineCrudCommand {
 
         $arguments = array(
             'command' => 'sg:datatable:generate',
-            'entity' => $input->getOption('entity')
+            'entity' => $input->getOption('entity'),
+            '--ajax-url' => ltrim($input->getOption('route-prefix'), '/').'_results'
         );
 
         $commandInput = new ArrayInput($arguments);
-        $returnCode = $command->run($commandInput, $output);
+        $command->run($commandInput, $output);
+    }
+    
+    protected function createGenerator($bundle = null)
+    {
+        return new DoctrineCrudGenerator($this->getContainer()->get('filesystem'));
     }
     
     protected function getSkeletonDirs(BundleInterface $bundle = null)
@@ -40,7 +47,6 @@ class GenerateDoctrineCrudCommand extends BaseGenerateDoctrineCrudCommand {
         if (is_dir($dir = $this->getContainer()->get('kernel')->getRootdir().'/Resources/SensioGeneratorBundle/skeleton')) {
             $skeletonDirs[] = $dir;
         }
-
 
         $bundleDirs = $this->getContainer()->get('kernel')
             ->locateResource('@SensioGeneratorBundle/Resources/skeleton', null, false);
