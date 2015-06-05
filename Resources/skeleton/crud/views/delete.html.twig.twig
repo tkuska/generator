@@ -3,7 +3,7 @@
 {% endblock extends %}
 
 {% block body %}
-    {{'{% block page_head %}{{ entity }} delete{%endblock %}'}}
+    {{'{% block page_head %}'}}{{ entity }} delete{{'{%endblock %}'}}
     {{ "{% block body -%}" }}
 <div class="panel panel-default">
         <div class="panel-heading">{{ entity }} delete</div>
@@ -12,8 +12,10 @@
             {{ '{{ form_widget(form) }}' }}
         </div>
         <div class="panel-footer">
+            <div class="btn-group">
                 {% set hide_edit, hide_delete = true, false %}
                 {% include 'crud/views/others/record_actions.html.twig.twig' %}
+            </div>
         </div>
         {{'{form_end(form)}}'}}
 </div>
