@@ -3,10 +3,10 @@
 {% endblock extends %}
 
 {% block body %}
-{{'{% block page_head %}'}}{{ entity }}{{'{%endblock %}'}}
+{{'{% block page_head %}'}}{{ entity }} details{{'{%endblock %}'}}
 {{ "{% block body -%}" }}
 <div class="panel panel-default">
-    <div class="panel-heading">Szczegóły statusu zamówienia</div>
+    <div class="panel-heading">{{ entity }} details</div>
     <div class="panel-body">
         {%- for field, metadata in fields %}
 
