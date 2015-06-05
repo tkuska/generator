@@ -1,12 +1,6 @@
 
-                <ul>
+        {%- for action in record_actions %}
 
-                {%- for action in record_actions %}
+                <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity."~ identifier ~" }) }}" }}"  class="btn btn-default"><i class="glyphicon glyphicon-backward"></i> {{ action }}</a>
 
-                    <li>
-                        <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity."~ identifier ~" }) }}" }}">{{ action }}</a>
-                    </li>
-
-                {%- endfor %}
-
-                </ul>
+        {%- endfor %}

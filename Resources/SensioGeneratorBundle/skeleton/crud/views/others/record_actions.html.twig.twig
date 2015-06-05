@@ -1,17 +1,16 @@
-<ul class="record_actions">
-    <li>
-        <a class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "') }}" }}">
-            Back to the list
-        </a>
-    </li>
-{% if ('edit' in actions) and (not hide_edit) %}
-    <li>
+
+<div class="btn-group">
+    <a class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "') }}" }}">
+        <i class="glyphicon glyphicon-backward"></i> Back to the list
+    </a>
+    {% if ('edit' in actions) and (not hide_edit) %}
         <a class="btn btn-primary" href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { 'id': entity."~ identifier ~" }) }}" }}">
-            Edit
+            <i class="glyphicon glyphicon-edit"></i> Edit
         </a>
-    </li>
-{% endif %}
-{% if ('delete' in actions) and (not hide_delete) %}
-    <li>{{ '{{ form(delete_form) }}' }}</li>
-{% endif %}
-</ul>
+    {% endif %}
+    {% if ('delete' in actions) and (not hide_delete) %}
+        <a class="btn btn-danger" href="{{ "{{ path('" ~ route_name_prefix ~ "_delete_confirm', { 'id': entity."~ identifier ~" }) }}" }}">
+            <i class="glyphicon glyphicon-remove"></i> Delete
+        </a>
+    {% endif %}
+</div>

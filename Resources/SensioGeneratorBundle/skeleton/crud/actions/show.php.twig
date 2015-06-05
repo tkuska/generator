@@ -18,26 +18,17 @@
 {% endblock method_definition %}
     {
 {% block method_body %}
-{% if 'delete' in actions %}
 
-        $deleteForm = $this->createDeleteForm($entity);
-{% endif %}
 {% endblock method_body %}
 
 {% block method_return %}
 {% if 'annotation' == format %}
         return array(
             'entity'      => $entity,
-{% if 'delete' in actions %}
-            'delete_form' => $deleteForm->createView(),
-{% endif %}
         );
 {% else %}
         return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:show.html.twig', array(
             'entity'      => $entity,
-{% if 'delete' in actions %}
-            'delete_form' => $deleteForm->createView(),
-{% endif %}
         ));
 {% endif %}
 {% endblock method_return %}

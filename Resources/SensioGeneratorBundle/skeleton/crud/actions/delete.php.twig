@@ -50,3 +50,39 @@
         ;
     }
 {% endblock form %}
+
+/**
+{% block phpdoc_confirm_method_header %}
+     * Confirm deletion a {{ entity }} entity.
+{% endblock phpdoc_confirm_method_header %}
+     *
+{% block phpdoc_confirm_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/delete/{id}", name="{{ route_name_prefix }}_delete_confirm")
+     * @Method("GET")
+{% endif %}
+     * @ParamConverter("entity", class="{{ namespace }}\Entity\{{ entity }}")
+{% endblock phpdoc_confirm_method_annotations %}
+     */
+{% block confirm_method_definition %}
+    public function deleteAction(Request $request, {{ entity }} $entity)
+{% endblock confirm_method_definition %}
+    {
+{% block confirm_method_body %}
+        $form = $this->createDeleteForm($entity);
+        
+{% endblock confirm_method_body %}
+{% block confirm_method_return %}
+{% if 'annotation' == format %}
+        return array(
+            'entity'      => $entity,
+            'form'   => $form->createView(),
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:edit.html.twig', array(
+            'entity'      => $entity,
+            'form'   => $form->createView(),
+        ));
+{% endif %}
+{% endblock confirm_method_return %}
+    }

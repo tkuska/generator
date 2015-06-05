@@ -1,12 +1,12 @@
 {% block extends %}
-{{ "{% extends '::base.html.twig' %}" }}
+    {{ "{% extends '::base.html.twig' %}" }}
 {% endblock extends %}
 
 {% block body %}
-    {{'{% block page_head %}{{ entity }} edit{%endblock %}'}}
-{{ "{% block body -%}" }}
+    {{'{% block page_head %}{{ entity }} delete{%endblock %}'}}
+    {{ "{% block body -%}" }}
 <div class="panel panel-default">
-        <div class="panel-heading">{{ entity }} edit</div>
+        <div class="panel-heading">{{ entity }} delete</div>
         {{'{{form_start(form)}}'}}
         <div class="panel-body">
             {{ '{{ form_widget(form) }}' }}
@@ -17,5 +17,5 @@
         </div>
         {{'{form_end(form)}}'}}
 </div>
-{{ "{% endblock %}" }}
+    {{ "{% endblock %}" }}
 {% endblock body %}

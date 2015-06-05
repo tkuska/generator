@@ -19,7 +19,6 @@
     {
 {% block method_body %}
         $form = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($entity);
 {% endblock method_body %}
 
 {% block method_return %}
@@ -27,13 +26,11 @@
         return array(
             'entity'      => $entity,
             'form'   => $form->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
 {% else %}
         return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $form->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
 {% endif %}
 {% endblock method_return %}
