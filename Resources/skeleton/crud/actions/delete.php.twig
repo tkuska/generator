@@ -45,7 +45,6 @@
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('{{ route_name_prefix }}_delete', array('id' => $entity->getId())))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete', 'attr' => array('class' => 'btn btn-danger')))
             ->getForm()
         ;
     }
@@ -60,6 +59,7 @@
 {% if 'annotation' == format %}
      * @Route("/delete/{id}", name="{{ route_name_prefix }}_delete_confirm")
      * @Method("GET")
+     * @Template()
 {% endif %}
      * @ParamConverter("entity", class="{{ namespace }}\Entity\{{ entity }}")
 {% endblock phpdoc_confirm_method_annotations %}
