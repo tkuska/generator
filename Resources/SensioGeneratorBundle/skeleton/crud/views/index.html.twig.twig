@@ -7,7 +7,7 @@
     {{'{{ parent() }}'}}
     {{'{{ datatable_render_js(datatable) }}'}}
     {{'{% endblock %}'}}
-    {{'{% block page_head %}{{ entity }}{%endblock %}'}}
+    {{'{% block page_head %}'}}{{ entity }}{{'{%endblock %}'}}
     {{ "{% block body -%}" }}
     <div class="panel panel-default">
         <div class="panel panel-heading">{{ entity }}</div>

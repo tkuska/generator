@@ -65,12 +65,12 @@
 {% endblock phpdoc_confirm_method_annotations %}
      */
 {% block confirm_method_definition %}
-    public function deleteAction(Request $request, {{ entity }} $entity)
+    public function confirmDeleteAction({{ entity }} $entity)
 {% endblock confirm_method_definition %}
     {
 {% block confirm_method_body %}
         $form = $this->createDeleteForm($entity);
-        
+
 {% endblock confirm_method_body %}
 {% block confirm_method_return %}
 {% if 'annotation' == format %}

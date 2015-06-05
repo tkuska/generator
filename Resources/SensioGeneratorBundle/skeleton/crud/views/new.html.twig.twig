@@ -3,7 +3,7 @@
 {% endblock extends %}
 
 {% block body %}
-    {{'{% block page_head %}{{ entity }} creation{%endblock %}'}}
+    {{'{% block page_head %}'}}{{ entity }} creation{{'{%endblock %}'}}
     {{ "{% block body -%}" }}
     <div class="panel panel-default">
         <div class="panel-heading">{{ entity }} creation</div>
@@ -15,7 +15,7 @@
                 {% set hide_edit, hide_delete = true, true %}
                 {% include 'crud/views/others/record_actions.html.twig.twig' %}
         </div>
-        {{'{form_end(form)}}'}}
+        {{'{{form_end(form)}}'}}
     </div>
     {{ "{% endblock %}" }}
 {% endblock body %}

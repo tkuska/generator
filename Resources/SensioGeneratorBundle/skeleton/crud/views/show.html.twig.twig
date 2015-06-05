@@ -3,10 +3,10 @@
 {% endblock extends %}
 
 {% block body %}
-    {{'{% block page_head %}{{ entity }}{%endblock %}'}}
+    {{'{% block page_head %}'}}{{ entity }}{{'{%endblock %}'}}
     {{ "{% block body -%}" }}
     <div class="panel panel-default">
-        <div class="panel-heading">Szczegóły statusu zamówienia</div>
+        <div class="panel-heading">{{ entity }}</div>
         <div class="panel-body">
             {%- for field, metadata in fields %}
 
@@ -14,7 +14,6 @@
                 <label class="col-sm-2 control-label">{{ field|capitalize }}</label>
 
                 {%- if metadata.type in ['date', 'datetime'] %}
-
 
                 <div class="col-sm-10">
                     <p class="form-control-static">{{ '{{ entity.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}' }}</p>
@@ -30,7 +29,7 @@
 
             </div>
 
-            {%- endfor %}            
+            {%- endfor %}
         </div>
         <div class="panel-footer">
             {% set hide_edit, hide_delete = false, false %}
