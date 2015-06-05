@@ -1,0 +1,88 @@
+    /**
+{% block phpdoc_method_header %}
+     * Deletes a {{ entity }} entity.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/{id}", name="{{ route_name_prefix }}_delete")
+     * @Method("DELETE")
+{% endif %}
+     * @ParamConverter("entity", class="{{ namespace }}\Entity\{{ entity }}")
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function deleteAction(Request $request, {{ entity }} $entity)
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        $form = $this->createDeleteForm($entity);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->remove($entity);
+            $em->flush();
+        }
+{% endblock method_body %}
+
+{% block method_return %}
+        return $this->redirect($this->generateUrl('{{ route_name_prefix }}'));
+{% endblock method_return %}
+    }
+
+{% block form %}
+    /**
+     * Creates a form to delete a {{ entity }} entity by id.
+     *
+     * @param {{ entity }} $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm({{ entity }} $entity)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('{{ route_name_prefix }}_delete', array('id' => $entity->getId())))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => 'Delete', 'attr' => array('class' => 'btn btn-danger')))
+            ->getForm()
+        ;
+    }
+{% endblock form %}
+
+/**
+{% block phpdoc_confirm_method_header %}
+     * Confirm deletion a {{ entity }} entity.
+{% endblock phpdoc_confirm_method_header %}
+     *
+{% block phpdoc_confirm_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/delete/{id}", name="{{ route_name_prefix }}_delete_confirm")
+     * @Method("GET")
+{% endif %}
+     * @ParamConverter("entity", class="{{ namespace }}\Entity\{{ entity }}")
+{% endblock phpdoc_confirm_method_annotations %}
+     */
+{% block confirm_method_definition %}
+    public function deleteAction(Request $request, {{ entity }} $entity)
+{% endblock confirm_method_definition %}
+    {
+{% block confirm_method_body %}
+        $form = $this->createDeleteForm($entity);
+        
+{% endblock confirm_method_body %}
+{% block confirm_method_return %}
+{% if 'annotation' == format %}
+        return array(
+            'entity'      => $entity,
+            'form'   => $form->createView(),
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:edit.html.twig', array(
+            'entity'      => $entity,
+            'form'   => $form->createView(),
+        ));
+{% endif %}
+{% endblock confirm_method_return %}
+    }

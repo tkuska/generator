@@ -1,0 +1,26 @@
+{% block extends %}
+    {{ "{% extends '::base.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+    {{'{% block javascripts %}'}}
+    {{'{{ parent() }}'}}
+    {{'{{ datatable_render_js(datatable) }}'}}
+    {{'{% endblock %}'}}
+    {{'{% block page_head %}{{ entity }}{%endblock %}'}}
+    {{ "{% block body -%}" }}
+    <div class="panel panel-default">
+        <div class="panel panel-heading">{{ entity }}</div>
+        <div class="panel panel-body">
+            {{'{{ datatable_render_html(datatable) }}'}}
+        </div>
+        <div class="panel-footer">
+            {% if 'new' in actions %}
+                <a href="{{ "{{ path('" ~ route_name_prefix ~ "_new') }}" }}" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-plus"></i> Create a new entry
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    {{ "{% endblock %}" }}
+{% endblock body %}

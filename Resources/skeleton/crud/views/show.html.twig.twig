@@ -1,0 +1,43 @@
+{% block extends %}
+    {{ "{% extends '::base.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+    {{'{% block page_head %}{{ entity }}{%endblock %}'}}
+    {{ "{% block body -%}" }}
+    <div class="panel panel-default">
+        <div class="panel-heading">Szczegóły statusu zamówienia</div>
+        <div class="panel-body">
+            {%- for field, metadata in fields %}
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ field|capitalize }}</label>
+
+                {%- if metadata.type in ['date', 'datetime'] %}
+
+
+                <div class="col-sm-10">
+                    <p class="form-control-static">{{ '{{ entity.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}' }}</p>
+                </div>
+
+                {%- else %}
+
+                <div class="col-sm-10">
+                    <p class="form-control-static">{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</p>
+                </div>
+
+                {%- endif %}
+
+            </div>
+
+            {%- endfor %}            
+        </div>
+        <div class="panel-footer">
+            {% set hide_edit, hide_delete = false, false %}
+            {% include 'crud/views/others/record_actions.html.twig.twig' %}
+        </div>
+    </div>
+
+
+    {{ "{% endblock %}" }}
+{% endblock body %}
