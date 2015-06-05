@@ -57,7 +57,7 @@
      *
 {% block phpdoc_confirm_method_annotations %}
 {% if 'annotation' == format %}
-     * @Route("/delete/{id}", name="{{ route_name_prefix }}_delete_confirm")
+     * @Route("/{id}/delete", name="{{ route_name_prefix }}_delete_confirm")
      * @Method("GET")
      * @Template()
 {% endif %}
