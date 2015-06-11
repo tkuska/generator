@@ -24,7 +24,10 @@
 
             $em->remove($entity);
             $em->flush();
+            
+            $this->addFlash('success', '{{ entity }} successfully deleted.');
         }
+        $this->addFlash('error', 'Could not delete {{ entity }}');
 {% endblock method_body %}
 
 {% block method_return %}

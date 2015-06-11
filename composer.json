@@ -18,8 +18,7 @@
         "sensio/generator-bundle": "~2.3"
     },
     "autoload": {
-        "psr-0": { "Tkuska\\GeneratorBundle": "" }
+        "psr-4": { "Tkuska\\GeneratorBundle\\": "" }
     },
-    "minimum-stability": "dev",
-    "target-dir": "Tkuska/GeneratorBundle"
+    "minimum-stability": "dev"
 }

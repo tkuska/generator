@@ -24,14 +24,18 @@
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            
+            $this->addFlash('success', '{{ entity }} successfully saved');
 
-            {% if 'show' in actions -%}
-                return $this->redirect($this->generateUrl('{{ route_name_prefix }}_show', array('id' => $entity->getId())));
-            {%- else -%}
-                return $this->redirect($this->generateUrl('{{ route_name_prefix }}'));
-            {%- endif %}
+        {% if 'show' in actions -%}
+            return $this->redirect($this->generateUrl('{{ route_name_prefix }}_show', array('id' => $entity->getId())));
+        {%- else -%}
+            return $this->redirect($this->generateUrl('{{ route_name_prefix }}'));
+        {%- endif %}
 
         }
+                
+        $this->addFlash('error', 'Could not save {{ entity }}');
 {% endblock method_body %}
 
 {% block method_return %}
