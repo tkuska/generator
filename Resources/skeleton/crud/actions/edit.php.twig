@@ -46,7 +46,7 @@
     */
     private function createEditForm({{ entity_class }} $entity)
     {
-        $form = $this->createForm(new {{ entity_class }}Type(), $entity, array(
+        $form = $this->createForm({{ entity_class }}::class, $entity, array(
             'action' => $this->generateUrl('{{ route_name_prefix }}_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));

@@ -17,7 +17,8 @@
 {% endblock method_definition %}
     {
 {% block method_body %}
-        $datatable = $this->get("sg_datatables.{{ entity|lower }}");
+        $datatable = $this->get("sg_datatables.{{ entity|lower }}");        
+        $datatable->buildDatatable();
 {% endblock method_body %}
 
 {% block method_return %}

@@ -17,10 +17,12 @@
 {% endblock method_definition %}
     {
 {% block method_body %}
-        $datatable = $this->get("sg_datatables.query")->getQueryFrom($this->get("sg_datatables.{{ entity|lower }}"));
+        $datatable = $this->get("sg_datatables.{{ entity|lower }}");
+        $datatable->buildDatatable();
+        $query = $this->get("sg_datatables.query")->getQueryFrom($datatable);
 {% endblock method_body %}
 
 {% block method_return %}
-        return $datatable->getResponse();
+        return $query->getResponse();
 {% endblock method_return %}
     }
